@@ -230,7 +230,7 @@ def create_app(test_config=None):
     body = request.get_json()
     previous_questions = body.get('previous_questions')
     quiz_category = body.get('quiz_category')
-    if quiz_category['id'] == '0':
+    if quiz_category['id'] == 0:
         selection = Question.query.filter(Question.id.notin_(previous_questions)).order_by(func.random()).limit(1)
     else:
         selection = Question.query.filter(Question.category == quiz_category["id"], Question.id.notin_(previous_questions)).order_by(func.random()).limit(1)
@@ -240,10 +240,9 @@ def create_app(test_config=None):
     }
 
     if selection is not None:
-      res['currentQuestion'] = selection
+      res['question'] = paginate_questions(request, selection)[0]
     
-    return res
-
+    return jsonify(res) 
   '''
   @DONE: 
   Create error handlers for all expected errors 
