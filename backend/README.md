@@ -61,13 +61,56 @@ Endpoints
 GET '/categories'
 - Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
 - Request Arguments: None
-- Returns: An object with a single key, categories.
-{"Science",
-"Art",
-"Geography",
-"History",
-"Entertainment",
-"Sports"}
+- Returns: An object with a single key, categories, that contains a object of id: category_string key:value pairs. 
+{'1' : "Science",
+'2' : "Art",
+'3' : "Geography",
+'4' : "History",
+'5' : "Entertainment",
+'6' : "Sports"}
+  
+GET '/questions'
+- Fetches an array of questions which contains paginated (every 10 questions) questions of the database 
+- Fetches a dictionary of categories in which the keys are the ids and the value is the corresponding string of the category
+- Request Arguments: None
+- Returns: An object with keys: questions (array of questions), total_questions (num of questions), categories
+
+DELTE '/questions/question_id'
+- Fetches an object by its id
+- Deletes this question from the database
+- Request Arguments: question_id (id of the question needed to be deleted)
+- Returns: An object with keys: questions (array of questions), total_questions (num of questions)
+
+POST '/questions'
+- Fetches request from the frontend to obatain the new data of the new question
+- Inserts the new question into the database
+- Request Arguments: question=new_question, answer=new_answer, difficulty=new_difficulty, category=some_category
+- Returns: An object with keys: created (id of the new inserted question) , questions : current_questions, the total number of questions
+
+POST '/questions/srch'
+- Fetches request from the frontend to obatain the search term
+- Selects the suitable questions from the database
+- Request Arguments: searchTerm (The key word for searching)
+- Returns: An object with key: questions (the suitable questions from the database)
+
+GET '/categories/<current_category>/questions'
+- Fetches an array of questions which contains paginated (every 10 questions) questions of the database with the needed category
+- Request Arguments: current_category (id of the category)
+- Returns: An object with key: questions (the suitable questions from the database)
+
+
+
+POST '/quizzes'
+- Fetches category and previous question 
+- Selects a question from the database with same category and not previous
+- Request Arguments: category and previous question 
+- Returns: An object with key: currentQuestion (the selected question)
+
+
+        
+        
+
+
 
 ```
 
